@@ -36,7 +36,14 @@
 				"command": "mayiwen.helloWorld",
 				"title": "Hello World"
 			}
-		]
+		],
+		"contributes": {
+			"keybindings": [{
+				"key": "ctrl+w",
+				"command": "editor.action.smartSelect.grow",
+				"when": "editorTextFocus"
+			  }]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
