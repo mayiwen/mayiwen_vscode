@@ -27,11 +27,7 @@
       "sidebar_test": [
         {
           "id": "sidebar_test_id1",
-          "name": "这是面板"
-        },
-        {
-          "id": "sidebar_test_id2",
-          "name": "这是第二个面板"
+          "name": "mayiwen"
         }
       ]
     },
@@ -41,28 +37,54 @@
         "title": "Hello World"
       }
     ],
-    "contributes": {
-      "keybindings": [
-        {
-          "command": "editor.action.smartSelect.expand",
-          "key": "ctrl+w",
-          "mac": "cmd+w"
-        },
-        {
-          "key": "alt+q",
-          "command": "workbench.view.explorer",
-          "when": "viewContainer.workbench.view.explorer.enabled"
-        },
-        {
-          "key": "alt+r",
-          "command": "bookmarksExplorer.focus"
-        },
-        {
-          "key": "alt+w",
-          "command": "bookmarksExplorer.focus"
-        }
-      ]
-    }
+    "keybindings": [
+      {
+        "command": "editor.action.smartSelect.expand",
+        "key": "ctrl+w",
+        "mac": "cmd+w"
+      },
+      {
+        "key": "alt+c",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "key": "alt+v",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+      },
+      {
+        "key": "alt+a",
+        "command": "workbench.files.action.focusOpenEditorsView",
+        "when": "workbench.explorer.openEditorsView.active"
+      },
+      {
+        "key": "alt+s",
+        "command": "workbench.view.search.focus"
+      },
+      {
+        "key": "alt+d",
+        "command": "workbench.view.extension.bookmarks"
+      },
+      {
+        "key": "alt+f",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "alt+g",
+        "command": "bookmarks.clear"
+      },
+      {
+        "key": "alt+delete",
+        "command": "workbench.action.closeOtherEditors"
+      },
+      {
+        "key": "alt+m",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
