@@ -1,8 +1,8 @@
 {
-  "name": "mayiwen",
-  "displayName": "mayiwen",
-  "description": "mayiwen",
-  "version": "0.0.1",
+  "name": "mayiwen002",
+  "displayName": "mayiwen0.02",
+  "description": "mayiwen0.02",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.64.0"
   },
