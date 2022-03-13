@@ -1,16 +1,20 @@
 {
-  "name": "mayiwen002",
-  "displayName": "mayiwen0.02",
-  "description": "mayiwen0.02",
-  "version": "0.0.2",
+  "name": "mayiwen-003",
+  "displayName": "mayiwen0.03",
+  "description": "mayiwen0.03",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.64.0"
   },
   "categories": [
     "Other"
   ],
+  "icon": "2222.png",
   "activationEvents": [
-    "onCommand:mayiwen.helloWorld"
+    "onCommand:mayiwen.helloWorld",
+    "onCommand:mayiwen.test",
+    "onCommand:mayiwen.testEditorCommand",
+    "onView:sidebar_test_id1"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -18,8 +22,8 @@
       "activitybar": [
         {
           "id": "sidebar_test",
-          "title": "侧边栏测试",
-          "icon": "a.svg"
+          "title": "马一文",
+          "icon": "2222.png"
         }
       ]
     },
@@ -27,7 +31,11 @@
       "sidebar_test": [
         {
           "id": "sidebar_test_id1",
-          "name": "mayiwen"
+          "name": "帮助"
+        },
+        {
+          "id": "sidebar_test_id2",
+          "name": "功能（暂未定义）"
         }
       ]
     },
@@ -35,13 +43,30 @@
       {
         "command": "mayiwen.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "mayiwen.test01",
+        "title": "test01"
+      },
+      {
+        "command": "mayiwen.testEditorCommand",
+        "title": "testEditorCommand"
       }
     ],
     "keybindings": [
       {
         "command": "editor.action.smartSelect.expand",
         "key": "ctrl+w",
-        "mac": "cmd+w"
+        "mac": "cmd+w",
+        "myw": "扩选"
+      },
+      {
+        "key": "alt+p",
+        "command": "workbench.action.closeEditorsInOtherGroups"
+      },
+      {
+        "command": "mayiwen.testEditorCommand",
+        "key": "alt+o"
       },
       {
         "key": "alt+c",
@@ -83,6 +108,20 @@
         "key": "alt+m",
         "command": "editor.action.commentLine",
         "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/javascript.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/javascript.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/javascript.json"
       }
     ]
   },
