@@ -1,8 +1,8 @@
 {
-  "name": "mayiwen-003",
-  "displayName": "mayiwen0.03",
-  "description": "mayiwen0.03",
-  "version": "0.0.3",
+  "name": "mayiwen-004",
+  "displayName": "mayiwen0.04",
+  "description": "mayiwen0.04",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.64.0"
   },
@@ -11,9 +11,15 @@
   ],
   "icon": "2222.png",
   "activationEvents": [
-    "onCommand:mayiwen.helloWorld",
-    "onCommand:mayiwen.test",
-    "onCommand:mayiwen.testEditorCommand",
+    "onCommand:mayiwen.consoleLog",
+    "onCommand:mayiwen.quickLet",
+    "onCommand:mayiwen.quickConst",
+    "onCommand:mayiwen.quickEqual",
+    "onCommand:mayiwen.quickString",
+    "onCommand:mayiwen.quickNumber",
+    "onCommand:mayiwen.quickPrivate",
+    "onCommand:mayiwen.quickPublic",
+    "onCommand:mayiwen.quickArror",
     "onView:sidebar_test_id1"
   ],
   "main": "./dist/extension.js",
@@ -32,26 +38,19 @@
         {
           "id": "sidebar_test_id1",
           "name": "帮助"
-        },
-        {
-          "id": "sidebar_test_id2",
-          "name": "功能（暂未定义）"
         }
       ]
     },
     "commands": [
-      {
-        "command": "mayiwen.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "mayiwen.test01",
-        "title": "test01"
-      },
-      {
-        "command": "mayiwen.testEditorCommand",
-        "title": "testEditorCommand"
-      }
+      { "command": "mayiwen.consoleLog", "title": "consoleLog" },
+      { "command": "mayiwen.quickLet", "title": "quickLet" },
+      { "command": "mayiwen.quickConst", "title": "quickConst" },
+      { "command": "mayiwen.quickEqual", "title": "quickEqual"},
+      { "command": "mayiwen.quickString", "title": "quickString"},
+      { "command": "mayiwen.quickNumber", "title": "quickNumber"},
+      { "command": "mayiwen.quickNumber", "title": "quickPrivate"},
+      { "command": "mayiwen.quickNumber", "title": "quickPublic"},
+      { "command": "mayiwen.quickArror", "title": "quickArror"}
     ],
     "keybindings": [
       {
@@ -65,8 +64,40 @@
         "command": "workbench.action.closeEditorsInOtherGroups"
       },
       {
-        "command": "mayiwen.testEditorCommand",
+        "command": "mayiwen.consoleLog",
+        "key": "alt+j"
+      },
+      {
+        "command": "mayiwen.quickLet",
+        "key": "alt+u"
+      },
+      {
+        "command": "mayiwen.quickConst",
+        "key": "alt+i"
+      },
+      {
+        "command": "mayiwen.quickEqual",
         "key": "alt+o"
+      },
+      {
+        "command": "mayiwen.quickString",
+        "key": "alt+k"
+      },
+      {
+        "command": "mayiwen.quickNumber",
+        "key": "alt+l"
+      },
+      {
+        "command": "mayiwen.quickPrivate",
+        "key": "alt+h"
+      },
+      {
+        "command": "mayiwen.quickPublic",
+        "key": "alt+y"
+      },
+      {
+        "command": "mayiwen.quickArror",
+        "key": "alt+n"
       },
       {
         "key": "alt+c",

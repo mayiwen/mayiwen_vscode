@@ -46,6 +46,15 @@ export class EntryList implements vscode.TreeDataProvider<EntryItem>
             childs.push(this.setData("alt f => 收藏开关"))
             childs.push(this.setData("alt g => 清空收藏"))
             childs.push(this.setData("alt m => 单行注释"))
+            childs.push(this.setData("alt j => console.log()"))
+            childs.push(this.setData("alt u => let"))
+            childs.push(this.setData("alt i => const"))
+            childs.push(this.setData("alt o =>  = "))
+            childs.push(this.setData("alt k => :string"))
+            childs.push(this.setData("alt l => :number"))
+            childs.push(this.setData("alt h => private"))
+            childs.push(this.setData("alt y => pubilc"))
+            childs.push(this.setData("alt n => =>"))
             return childs
         }
     }
