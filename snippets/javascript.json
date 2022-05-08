@@ -2,14 +2,14 @@
 	"clog": {
 		"prefix": "l",
 		"body": [
-		  "console.log('$0')"
+			"console.log($0)"
 		],
 		"description": "console.log()"
 	},
 	"cerror": {
 		"prefix": "le",
 		"body": [
-		  "console.error('$0')"
+			"console.error($0)"
 		],
 		"description": "console.error()"
 	}
