@@ -2,14 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as sidebar from './left/help';
-import {consoleLog, quickLet, quickConst, quickEqual, quickString, quickNumber, quickPrivate, quickPublic, quickArror} from './mayiwen/quickJs';
+import {consoleLog, quickLet, quickConst, quickEqual, quickString, quickNumber, quickPrivate, quickPublic, quickArror, quickCurlyBrackets, quickCurlyBracketsLeft} from './mayiwen/quickJs';
 // this method is called when your extension is activated
-export function editSnippet(text : string, col: any ) {
-	let editor  = vscode.window.activeTextEditor as any;
-	let selection : vscode.Selection = editor.selection;
-	let insertPosition = new vscode.Position(selection.active.line, col);
-	editor.insertSnippet(new vscode.SnippetString(text), insertPosition);
-}
 export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -56,7 +50,6 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand("sidebar_test_id1.openChild", args => {
 		vscode.window.showInformationMessage(args);
 	});
-	context.subscriptions.push(consoleLog, quickLet, quickConst, quickEqual, quickString, quickNumber, quickPrivate, quickPublic, quickArror );
-	
+	context.subscriptions.push(consoleLog, quickLet, quickConst, quickEqual, quickString, quickNumber, quickPrivate, quickPublic, quickArror, quickCurlyBrackets, quickCurlyBracketsLeft);
 }
 

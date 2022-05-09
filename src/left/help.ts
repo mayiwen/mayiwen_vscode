@@ -55,6 +55,8 @@ export class EntryList implements vscode.TreeDataProvider<EntryItem>
             childs.push(this.setData("alt h => private"))
             childs.push(this.setData("alt y => pubilc"))
             childs.push(this.setData("alt n => =>"))
+            childs.push(this.setData("alt , => 找{"))
+            childs.push(this.setData("alt . => 找}"))
             return childs
         }
     }

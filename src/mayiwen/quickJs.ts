@@ -40,3 +40,55 @@ export const quickArror = vscode.commands.registerTextEditorCommand('mayiwen.qui
     editor.insertSnippet(new vscode.SnippetString(''), insertPosition);
     vscode.commands.executeCommand('cursorRight');
 });
+export const quickCurlyBrackets = vscode.commands.registerTextEditorCommand('mayiwen.quickCurlyBrackets', (textEditor, edit) => {
+    const { ..._document } = vscode.window.activeTextEditor
+    let lines = [_document.document.getText().split('\r\n')]
+    let col = 0;
+    let row = 0;
+    let flag = false;
+    for (let index = textEditor.selection.active.line + 1; index < lines[0].length; index++) {
+        const element = lines[0][index];
+        if (!flag) {
+            console.log(element.indexOf('}'));
+            if (element.indexOf('}') !== -1) {
+                row = index;
+                col = element.indexOf('}');
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (flag) {
+        let editor  = vscode.window.activeTextEditor as any;
+        let selection : vscode.Selection = editor.selection;
+        let insertPosition = new vscode.Position(row, col);
+        editor.insertSnippet(new vscode.SnippetString(''), insertPosition);
+        vscode.commands.executeCommand('cursorRight');
+    }
+});
+export const quickCurlyBracketsLeft = vscode.commands.registerTextEditorCommand('mayiwen.quickCurlyBracketsLeft', (textEditor, edit) => {
+    const { ..._document } = vscode.window.activeTextEditor
+    let lines = [_document.document.getText().split('\r\n')]
+    let col = 0;
+    let row = 0;
+    let flag = false;
+    for (let index = textEditor.selection.active.line - 1; index >= 0; index--) {
+        const element = lines[0][index];
+        if (!flag) {
+            console.log(element.indexOf('{'));
+            if (element.indexOf('{') !== -1) {
+                row = index;
+                col = element.indexOf('{');
+                flag = true;
+                break;
+            }
+        }
+    }
+    if (flag) {
+        let editor  = vscode.window.activeTextEditor as any;
+        let selection : vscode.Selection = editor.selection;
+        let insertPosition = new vscode.Position(row, col);
+        editor.insertSnippet(new vscode.SnippetString(''), insertPosition);
+        vscode.commands.executeCommand('cursorRight');
+    }
+});
