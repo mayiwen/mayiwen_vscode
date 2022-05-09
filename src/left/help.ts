@@ -57,6 +57,8 @@ export class EntryList implements vscode.TreeDataProvider<EntryItem>
             childs.push(this.setData("alt n => =>"))
             childs.push(this.setData("alt , => 找{"))
             childs.push(this.setData("alt . => 找}"))
+            childs.push(this.setData("alt t => html 包裹div ts 包裹 try catch"))
+            childs.push(this.setData("alt . => 将选中的元素变成标签"))
             return childs
         }
     }

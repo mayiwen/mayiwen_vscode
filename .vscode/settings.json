@@ -9,5 +9,19 @@
         "dist": true // set this to false to include "dist" folder in search results
     },
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-    "typescript.tsc.autoDetect": "off"
+    "typescript.tsc.autoDetect": "off",
+    "favorites.resources": [
+        {
+            "filePath": "src\\mayiwen\\quickJs.ts",
+            "group": "Default"
+        },
+        {
+            "filePath": "src\\extension.ts",
+            "group": "Default"
+        },
+        {
+            "filePath": "package.json",
+            "group": "Default"
+        }
+    ]
 }

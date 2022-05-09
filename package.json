@@ -23,6 +23,8 @@
     "onCommand:mayiwen.quickArror",
     "onCommand:mayiwen.quickCurlyBrackets",
     "onCommand:mayiwen.quickCurlyBracketsLeft",
+    "onCommand:mayiwen.quickSurround",
+    "onCommand:mayiwen.quickSurroundSuper",
     "onView:sidebar_test_id1"
   ],
   "main": "./dist/extension.js",
@@ -55,7 +57,9 @@
       { "command": "mayiwen.quickNumber", "title": "quickPublic"},
       { "command": "mayiwen.quickArror", "title": "quickArror"},
       { "command": "mayiwen.quickArror", "title": "quickCurlyBrackets"},
-      { "command": "mayiwen.quickArror", "title": "quickCurlyBracketsLeft"}
+      { "command": "mayiwen.quickArror", "title": "quickCurlyBracketsLeft"},
+      { "command": "mayiwen.quickSurround", "title": "quickSurround"},
+      { "command": "mayiwen.quickSurroundSuper", "title": "quickSurroundSuper"}
     ],
     "keybindings": [
       {
@@ -111,6 +115,14 @@
       {
         "command": "mayiwen.quickCurlyBracketsLeft",
         "key": "alt+oem_comma"
+      },
+      {
+        "command": "mayiwen.quickSurround",
+        "key": "alt+b"
+      },
+      {
+        "command": "mayiwen.quickSurroundSuper",
+        "key": "alt+t"
       },
       {
         "key": "alt+c",
