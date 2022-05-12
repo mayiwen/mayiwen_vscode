@@ -1,39 +1,76 @@
 import * as vscode from "vscode";
-export function editSnippetInner(text: string, col: any) {
+import { selectionAround } from './common/selectEdit';
+import { getDocument, editSnippetInner, getType} from './common/publicFn'
+
+export function editSnippetInnerRow(text: string, col: any, row: any) {
   let editor = vscode.window.activeTextEditor as any;
   let selection: vscode.Selection = editor.selection;
-  let insertPosition = new vscode.Position(selection.active.line, col);
+  let insertPosition = new vscode.Position(row, col);
   editor.insertSnippet(new vscode.SnippetString(text), insertPosition);
 }
 export const consoleLog = vscode.commands.registerTextEditorCommand(
   "mayiwen.consoleLog",
   (textEditor, edit) => {
-    editSnippetInner("console.log()", textEditor.selection.active.character);
-    vscode.commands.executeCommand("cursorLeft");
+    if (getType() === "typescript") {
+      editSnippetInner("console.log()", textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
+    }
+    if (getType() === "html") {
+      editSnippetInner(`(click)="()"`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
+      vscode.commands.executeCommand("cursorLeft");
+      vscode.commands.executeCommand("cursorLeft");
+    }
   }
 );
 export const quickLet = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickLet",
   (textEditor, edit) => {
-    editSnippetInner("let ", textEditor.selection.active.character);
+    if (getType() === "typescript") {
+      editSnippetInner("let ", textEditor.selection.active.character);
+    }
+    if (getType() === "html") {
+      editSnippetInner(`*ngIf=""`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
+    }
   }
 );
 export const quickConst = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickConst",
   (textEditor, edit) => {
-    editSnippetInner("const ", textEditor.selection.active.character);
+    if (getType() === "typescript") {
+      editSnippetInner("const ", textEditor.selection.active.character);
+    }
+    if (getType() === "html") {
+      editSnippetInner(`*ngFor="let item of ;"`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
+      commandsLoop("cursorLeft", 1);
+    }
   }
 );
 export const quickEqual = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickEqual",
   (textEditor, edit) => {
-    editSnippetInner(" = ", textEditor.selection.active.character);
+
+    if (getType() === "typescript") {
+      editSnippetInner(" = ", textEditor.selection.active.character);
+    }
+    if (getType() === "html") {
+      editSnippetInner(`*ngFor="let item of ; let i = index"`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
+      commandsLoop("cursorLeft", 15);
+    }
   }
 );
 export const quickString = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickString",
   (textEditor, edit) => {
-    editSnippetInner(": string", textEditor.selection.active.character);
+    if (getType() === "typescript") {
+      editSnippetInner(": string", textEditor.selection.active.character);
+    }
+    if (getType() === "html") {
+      editSnippetInner(`[ngStyle]="{color: flag ? 'red' : 'blue'}"`, textEditor.selection.active.character);
+    }
   }
 );
 export const quickNumber = vscode.commands.registerTextEditorCommand(
@@ -45,7 +82,13 @@ export const quickNumber = vscode.commands.registerTextEditorCommand(
 export const quickPrivate = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickPrivate",
   (textEditor, edit) => {
-    editSnippetInner("private ", textEditor.selection.active.character);
+    if (getType() === "typescript") {
+      editSnippetInner("private ", textEditor.selection.active.character)
+
+    }
+    if (getType() === "html") {
+      editSnippetInner("border: 1px solid red;", textEditor.selection.active.character)
+    };
   }
 );
 export const quickPublic = vscode.commands.registerTextEditorCommand(
@@ -57,108 +100,161 @@ export const quickPublic = vscode.commands.registerTextEditorCommand(
 export const quickArror = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickArror",
   (textEditor, edit) => {
-    editSnippetInner("() => {\n}", textEditor.selection.active.character);
-    let editor: any = vscode.window.activeTextEditor as any;
-    let selection: vscode.Selection = editor.selection;
-    let row = selection.active.line;
-    let insertPosition = new vscode.Position(
-      row,
-      textEditor.selection.active.character
-    );
-    editSnippetInner("", textEditor.selection.active.character);
-    editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
-    vscode.commands.executeCommand("cursorRight");
+    if (getType() === "typescript") {
+      editSnippetInner("() => {\n}", textEditor.selection.active.character);
+      let editor: any = vscode.window.activeTextEditor as any;
+      let selection: vscode.Selection = editor.selection;
+      let row = selection.active.line;
+      let insertPosition = new vscode.Position(
+        row,
+        textEditor.selection.active.character
+      );
+      editSnippetInner("", textEditor.selection.active.character);
+      editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
+      vscode.commands.executeCommand("cursorRight");
+
+    }
+    if (getType() === "html") {
+      editSnippetInner(`[ngClass]="{className: flag}"`, textEditor.selection.active.character)
+    }
+
+
   }
 );
 export const quickCurlyBrackets = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickCurlyBrackets",
   (textEditor, edit) => {
-    const { ..._document } = vscode.window.activeTextEditor;
-    let lines = [_document.document.getText().split("\r\n")];
-    let col = 0;
-    let row = 0;
-    let flag = false;
-    for (
-      let index = textEditor.selection.active.line + 1;
-      index < lines[0].length;
-      index++
-    ) {
-      const element = lines[0][index];
-      if (!flag) {
-        console.log(element.indexOf("}"));
-        if (element.indexOf("}") !== -1) {
-          row = index;
-          col = element.indexOf("}");
-          flag = true;
-          break;
+    if (getType() === "typescript") {
+      const { ..._document } = vscode.window.activeTextEditor;
+      let lines: any
+      if (getDocument().eol === 1) {
+        lines = [_document.document.getText().split("\n")];
+      }
+      if (getDocument().eol === 2) {
+        lines = [_document.document.getText().split("\r\n")];
+      }
+      let col = 0;
+      let row = 0;
+      let flag = false;
+      for (
+        let index = textEditor.selection.active.line + 1;
+        index < lines[0].length;
+        index++
+      ) {
+        const element = lines[0][index];
+        if (!flag) {
+          console.log(element.indexOf("}"));
+          if (element.indexOf("}") !== -1) {
+            row = index;
+            col = element.indexOf("}");
+            flag = true;
+            break;
+          }
         }
       }
+      if (flag) {
+        let editor = vscode.window.activeTextEditor as any;
+        let selection: vscode.Selection = editor.selection;
+        let insertPosition = new vscode.Position(row, col);
+        editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
+        vscode.commands.executeCommand("cursorRight");
+      }
     }
-    if (flag) {
-      let editor = vscode.window.activeTextEditor as any;
-      let selection: vscode.Selection = editor.selection;
-      let insertPosition = new vscode.Position(row, col);
-      editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
-      vscode.commands.executeCommand("cursorRight");
+    if (getType() === "html") {
+      editSnippetInner(`style=""`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
     }
   }
 );
 export const quickCurlyBracketsLeft = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickCurlyBracketsLeft",
   (textEditor, edit) => {
-    const { ..._document } = vscode.window.activeTextEditor;
-    let lines = [_document.document.getText().split("\r\n")];
-    let col = 0;
-    let row = 0;
-    let flag = false;
-    for (
-      let index = textEditor.selection.active.line - 1;
-      index >= 0;
-      index--
-    ) {
-      const element = lines[0][index];
-      if (!flag) {
-        console.log(element.indexOf("{"));
-        if (element.indexOf("{") !== -1) {
-          row = index;
-          col = element.indexOf("{");
-          flag = true;
-          break;
+    if (getType() === "typescript") {
+      const { ..._document } = vscode.window.activeTextEditor;
+      let lines: any
+      if (getDocument().eol === 1) {
+        lines = [_document.document.getText().split("\n")];
+      }
+      if (getDocument().eol === 2) {
+        lines = [_document.document.getText().split("\r\n")];
+      }
+      let col = 0;
+      let row = 0;
+      let flag = false;
+      for (
+        let index = textEditor.selection.active.line - 1;
+        index >= 0;
+        index--
+      ) {
+        const element = lines[0][index];
+        if (!flag) {
+          console.log(element.indexOf("{"));
+          if (element.indexOf("{") !== -1) {
+            row = index;
+            col = element.indexOf("{");
+            flag = true;
+            break;
+          }
         }
       }
+      if (flag) {
+        let editor = vscode.window.activeTextEditor as any;
+        let selection: vscode.Selection = editor.selection;
+        let insertPosition = new vscode.Position(row, col);
+        editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
+        vscode.commands.executeCommand("cursorRight");
+      }
     }
-    if (flag) {
-      let editor = vscode.window.activeTextEditor as any;
-      let selection: vscode.Selection = editor.selection;
-      let insertPosition = new vscode.Position(row, col);
-      editor.insertSnippet(new vscode.SnippetString(""), insertPosition);
-      vscode.commands.executeCommand("cursorRight");
+    if (getType() === "html") {
+      editSnippetInner(`[(ngModel)]=""`, textEditor.selection.active.character);
+      vscode.commands.executeCommand("cursorLeft");
     }
   }
 );
 export const quickSurround = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickSurround",
   (textEditor, edit) => {
-    console.log('这是打印的selection')
-    console.log(textEditor.selection)
-    const selection = textEditor.selection
+    console.log("这是打印的selection");
+    console.log(textEditor.selection);
+    const selection = textEditor.selection;
     const { ..._document } = vscode.window.activeTextEditor;
-    console.log(_document)
-    const document = _document.document
-    if (document.languageId === 'html') {
-      let lines = [_document.document.getText().split("\r\n")];
-      let length = lines[0][selection.start.line].length
-      if (selection.start.line === selection.end.line) { // 同一行的才执行
+    console.log(_document);
+    const document = _document.document;
+    if (document.languageId === "html") {
+      let lines: any
+      if (document.eol === 1) {
+        lines = [_document.document.getText().split("\n")];
+      }
+      if (document.eol === 2) {
+        lines = [_document.document.getText().split("\r\n")];
+      }
+
+      let length = lines[0][selection.start.line].length;
+      if (selection.start.line === selection.end.line) {
+        // 同一行的才执行
         let str = lines[0][selection.start.line];
-        console.log(str.slice(selection.start.character, selection.end.character))
-        let newStr = str.slice(selection.start.character, selection.end.character)
-        console.log(`<${newStr}></${newStr}>`)
-        lines[0][selection.start.line] = replacepos(lines[0][selection.start.line], selection.start.character, selection.end.character, `<${newStr}></${newStr}>`)
-        console.log(lines[0][selection.start.line])
+        console.log(
+          str.slice(selection.start.character, selection.end.character)
+        );
+        let newStr = str.slice(
+          selection.start.character,
+          selection.end.character
+        );
+        console.log(`<${newStr}></${newStr}>`);
+        lines[0][selection.start.line] = replacepos(
+          lines[0][selection.start.line],
+          selection.start.character,
+          selection.end.character,
+          `<${newStr}></${newStr}>`
+        );
+        console.log(lines[0][selection.start.line]);
         vscode.commands.executeCommand("deleteRight");
-        editSnippetInner(`<${newStr}></${newStr}>`, textEditor.selection.start.character);
-        let length = Math.floor(`<${newStr}></${newStr}>`.length / 2)
-        for (let index = 0; index < (length + 1); index++) {
+        editSnippetInner(
+          `<${newStr}></${newStr}>`,
+          textEditor.selection.start.character
+        );
+        let length = Math.floor(`<${newStr}></${newStr}>`.length / 2);
+        for (let index = 0; index < length + 1; index++) {
           vscode.commands.executeCommand("cursorLeft");
         }
       }
@@ -168,91 +264,72 @@ export const quickSurround = vscode.commands.registerTextEditorCommand(
 export const quickSurroundSuper = vscode.commands.registerTextEditorCommand(
   "mayiwen.quickSurroundSuper",
   (textEditor, edit) => {
-    console.log('这是打印的selection')
-    console.log(textEditor.selection)
-    const selection = textEditor.selection
-    const { ..._document } = vscode.window.activeTextEditor;
-    console.log(_document)
-    const document = _document.document
-    if (document.languageId === 'html') {
-      let lines = [_document.document.getText().split("\r\n")][0];
-      // vscode.commands.executeCommand("deleteRight");
-      let arr = lines[selection.start.line]
-      console.log('这是打印的arr')
-      console.log(arr)
-      let index = arr.split('').findIndex(item => item !== ' ')
-      if (index !== -1) {
-        console.log('这是index')
-        console.log(index)
-        
-        let blankArr = ''
-        let blankArr1 = ''
-        let blankArr2 = ''
-        for (let i = 0; i < index - 1; i++) {
-          blankArr = blankArr + ' ';
-        }
-        blankArr1 = blankArr + ' <div>';
-        blankArr2 = blankArr + ' </div>';
-        let newLines = [blankArr1]
-        for (let index = selection.start.line; index <= selection.end.line; index++) {
-          const element = lines[index];
-          newLines.push('  ' + element);
-        }
-        newLines.push(blankArr2)
-        console.log('这是得出的文件')
-        console.log(newLines.join('\r\n'));
-        vscode.commands.executeCommand("editor.action.deleteLines");
-        vscode.commands.executeCommand("editor.action.insertLineBefore")
-        vscode.commands.executeCommand("cursorHome");
-        editSnippetInner(newLines.join('\r\n'), 0);
-        for (let i = 0; i < index; i++) {
-          vscode.commands.executeCommand("deleteRight");
-        }
-      }
+    const selection = textEditor.selection;
+    let document = getDocument();
+    if (document.languageId === "html") {
+      selectionAround(textEditor, {start: '<div>', end: '</div>'});
     }
-    if (document.languageId === 'typescript') {
-      let lines = [_document.document.getText().split("\r\n")][0];
-      // vscode.commands.executeCommand("deleteRight");
-      let arr = lines[selection.start.line]
-      console.log('这是打印的arr')
-      console.log(arr)
-      let index = arr.split('').findIndex(item => item !== ' ')
-      if (index !== -1) {
-        console.log('这是index')
-        console.log(index)
-        
-        let blankArr = ''
-        let blankArr1 = ''
-        let blankArr2 = ''
-        for (let i = 0; i < index - 1; i++) {
-          blankArr = blankArr + ' ';
-        }
-        blankArr1 = blankArr + ' try {';
-        blankArr2 = blankArr + ' } catch (error) {';
-        let blankArr3 = blankArr + '   console.error(error)';
-        let blankArr4 = blankArr + ' }';
-        let newLines = [blankArr1]
-        for (let index = selection.start.line; index <= selection.end.line; index++) {
-          const element = lines[index];
-          newLines.push('  ' + element);
-        }
-        newLines.push(blankArr2)
-        newLines.push(blankArr3)
-        newLines.push(blankArr4)
-        console.log('这是得出的文件')
-        console.log(newLines.join('\r\n'));
-        vscode.commands.executeCommand("editor.action.deleteLines");
-        vscode.commands.executeCommand("editor.action.insertLineBefore")
-        vscode.commands.executeCommand("cursorHome");
-        editSnippetInner(newLines.join('\r\n'), 0);
-        for (let i = 0; i < index; i++) {
-          vscode.commands.executeCommand("deleteRight");
-        }
-      }
+    if (document.languageId === "typescript") {
+      selectionAround(textEditor, {start: 'try {', end: '}',
+        stringList: [
+          '} catch (error) {',
+          '  console.error(error)'
+        ]});
     }
   }
 );
-export function replacepos(text: string,start: number,stop: number,replacetext: string){
-   	 let mystr = text.substring(0,start-1)+replacetext+text.substring(stop+1);
-   	 return mystr;
+
+export const quickStringAttr = vscode.commands.registerTextEditorCommand(
+  "mayiwen.quickStringAttr",
+  (textEditor, edit) => {
+    if (getType() === "typescript") {
+      editSnippetInner("${}", textEditor.selection.active.character);
+      commandsLoop("cursorLeft", 1);
+    }
+    if (getType() === "html") {
+      editSnippetInner(`class=""`, textEditor.selection.active.character);
+      commandsLoop("cursorLeft", 1);
+    }
+  }
+);
+
+export const quickMethod = vscode.commands.registerTextEditorCommand(
+  "mayiwen.quickMethod",
+  (textEditor, edit) => {
+    if (getType() === "typescript") {
+      // editSnippetInner("${}", textEditor.selection.active.character);
+
+      commandsLoop("cursorEnd", 1);
+      let time = setTimeout(() => {
+        editSnippetInner(" {\n}", textEditor.selection.active.character);
+        vscode.commands.executeCommand("editor.action.insertLineBefore");
+        clearTimeout(time);
+      }, 100);
+
+      // commandsLoop("cursorLeft", 1);
+
+    }
+    if (getType() === "html") {
+      // editSnippetInner(`class=""`, textEditor.selection.active.character);
+      // commandsLoop("cursorLeft", 1);
+    }
+  }
+);
+
+export function replacepos(
+  text: string,
+  start: number,
+  stop: number,
+  replacetext: string
+) {
+  let mystr =
+    text.substring(0, start - 1) + replacetext + text.substring(stop + 1);
+  return mystr;
 }
+
+export function commandsLoop(command: string, count: number) {
+  for (let index = 0; index < count; index++) {
+    vscode.commands.executeCommand(command);
+  }
+}
+

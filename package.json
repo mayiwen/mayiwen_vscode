@@ -1,8 +1,8 @@
 {
   "name": "mayiwen",
   "displayName": "mayiwen",
-  "description": "mayiwen0.06",
-  "version": "0.0.6",
+  "description": "mayiwen0.09",
+  "version": "0.0.9",
   "publisher": "mayiwen",
   "engines": {
     "vscode": "^1.64.0"
@@ -25,6 +25,8 @@
     "onCommand:mayiwen.quickCurlyBracketsLeft",
     "onCommand:mayiwen.quickSurround",
     "onCommand:mayiwen.quickSurroundSuper",
+    "onCommand:mayiwen.quickStringAttr",
+    "onCommand:mayiwen.quickMethod",
     "onView:sidebar_test_id1"
   ],
   "main": "./dist/extension.js",
@@ -59,7 +61,9 @@
       { "command": "mayiwen.quickArror", "title": "quickCurlyBrackets"},
       { "command": "mayiwen.quickArror", "title": "quickCurlyBracketsLeft"},
       { "command": "mayiwen.quickSurround", "title": "quickSurround"},
-      { "command": "mayiwen.quickSurroundSuper", "title": "quickSurroundSuper"}
+      { "command": "mayiwen.quickSurroundSuper", "title": "quickSurroundSuper"},
+      { "command": "mayiwen.quickSurroundSuper", "title": "quickStringAttr"},
+      { "command": "mayiwen.quickMethod", "title": "quickMethod"}
     ],
     "keybindings": [
       {
@@ -89,14 +93,6 @@
         "key": "alt+o"
       },
       {
-        "command": "mayiwen.quickString",
-        "key": "alt+k"
-      },
-      {
-        "command": "mayiwen.quickNumber",
-        "key": "alt+l"
-      },
-      {
         "command": "mayiwen.quickPrivate",
         "key": "alt+h"
       },
@@ -104,18 +100,24 @@
         "command": "mayiwen.quickPublic",
         "key": "alt+y"
       },
+
       {
-        "command": "mayiwen.quickArror",
-        "key": "alt+n"
+        "command": "mayiwen.quickString",
+        "key": "alt+oem_comma"
       },
       {
-        "command": "mayiwen.quickCurlyBrackets",
+        "command": "mayiwen.quickNumber",
         "key": "alt+oem_period"
       },
       {
         "command": "mayiwen.quickCurlyBracketsLeft",
-        "key": "alt+oem_comma"
+        "key": "alt+k"
       },
+      {
+        "command": "mayiwen.quickCurlyBrackets",
+        "key": "alt+l"
+      },
+
       {
         "command": "mayiwen.quickSurround",
         "key": "alt+b"
@@ -157,11 +159,39 @@
         "command": "bookmarks.clear"
       },
       {
+        "command": "mayiwen.quickStringAttr",
+        "key": "alt+oem_1"
+      },
+      {
         "key": "alt+delete",
         "command": "workbench.action.closeOtherEditors"
       },
       {
-        "key": "alt+m",
+        "command": "editor.action.insertLineBefore",
+        "key": "alt+z"
+      },
+      {
+        "command": "editor.action.insertLineAfter",
+        "key": "alt+x"
+      },
+      {
+        "command": "editor.action.moveLinesUpAction",
+        "key": "alt+e"
+      },
+      {
+        "command": "editor.action.moveLinesDownAction",
+        "key": "alt+r"
+      },
+      {
+        "command": "mayiwen.quickArror",
+        "key": "alt+m"
+      },
+      {
+        "command": "mayiwen.quickMethod",
+        "key": "alt+n"
+      },
+      {
+        "key": "alt+oem_7",
         "command": "editor.action.commentLine",
         "when": "editorTextFocus && !editorReadonly"
       }
