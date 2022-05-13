@@ -33,8 +33,10 @@ export class EntryList implements vscode.TreeDataProvider<EntryItem> {
       // return [new EntryItem("根目录", vscode.TreeItemCollapsibleState.Collapsed)];
       let childs = [];
       childs.push(this.setData("需在设置中禁用enable menu bar mnemonics"));
+      childs.push(this.setData("使用myw001字体，设置行高"));
       childs.push(this.setData("l => console.log('')"));
       childs.push(this.setData("le => console.error('')"));
+      childs.push(this.setData("f => 生成一个没有名字的方法。"));
       childs.push(this.setData("alt q => 外部-打开浏览器"));
       childs.push(this.setData("alt w => 外部-打开vscode"));
       childs.push(this.setData("alt e => 上移一行"));

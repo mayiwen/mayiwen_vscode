@@ -1,8 +1,8 @@
 {
   "name": "mayiwen",
   "displayName": "mayiwen",
-  "description": "mayiwen0.09",
-  "version": "0.0.9",
+  "description": "mayiwen0.11",
+  "version": "0.1.1",
   "publisher": "mayiwen",
   "engines": {
     "vscode": "^1.64.0"
@@ -10,7 +10,7 @@
   "categories": [
     "Other"
   ],
-  "icon": "2222.png",
+  "icon": "myw-logo.png",
   "activationEvents": [
     "onCommand:mayiwen.consoleLog",
     "onCommand:mayiwen.quickLet",
@@ -36,7 +36,7 @@
         {
           "id": "sidebar_test",
           "title": "马一文",
-          "icon": "2222.png"
+          "icon": "myw-logo.png"
         }
       ]
     },
@@ -49,21 +49,66 @@
       ]
     },
     "commands": [
-      { "command": "mayiwen.consoleLog", "title": "consoleLog" },
-      { "command": "mayiwen.quickLet", "title": "quickLet" },
-      { "command": "mayiwen.quickConst", "title": "quickConst" },
-      { "command": "mayiwen.quickEqual", "title": "quickEqual"},
-      { "command": "mayiwen.quickString", "title": "quickString"},
-      { "command": "mayiwen.quickNumber", "title": "quickNumber"},
-      { "command": "mayiwen.quickNumber", "title": "quickPrivate"},
-      { "command": "mayiwen.quickNumber", "title": "quickPublic"},
-      { "command": "mayiwen.quickArror", "title": "quickArror"},
-      { "command": "mayiwen.quickArror", "title": "quickCurlyBrackets"},
-      { "command": "mayiwen.quickArror", "title": "quickCurlyBracketsLeft"},
-      { "command": "mayiwen.quickSurround", "title": "quickSurround"},
-      { "command": "mayiwen.quickSurroundSuper", "title": "quickSurroundSuper"},
-      { "command": "mayiwen.quickSurroundSuper", "title": "quickStringAttr"},
-      { "command": "mayiwen.quickMethod", "title": "quickMethod"}
+      {
+        "command": "mayiwen.consoleLog",
+        "title": "consoleLog"
+      },
+      {
+        "command": "mayiwen.quickLet",
+        "title": "quickLet"
+      },
+      {
+        "command": "mayiwen.quickConst",
+        "title": "quickConst"
+      },
+      {
+        "command": "mayiwen.quickEqual",
+        "title": "quickEqual"
+      },
+      {
+        "command": "mayiwen.quickString",
+        "title": "quickString"
+      },
+      {
+        "command": "mayiwen.quickNumber",
+        "title": "quickNumber"
+      },
+      {
+        "command": "mayiwen.quickNumber",
+        "title": "quickPrivate"
+      },
+      {
+        "command": "mayiwen.quickNumber",
+        "title": "quickPublic"
+      },
+      {
+        "command": "mayiwen.quickArror",
+        "title": "quickArror"
+      },
+      {
+        "command": "mayiwen.quickArror",
+        "title": "quickCurlyBrackets"
+      },
+      {
+        "command": "mayiwen.quickArror",
+        "title": "quickCurlyBracketsLeft"
+      },
+      {
+        "command": "mayiwen.quickSurround",
+        "title": "quickSurround"
+      },
+      {
+        "command": "mayiwen.quickSurroundSuper",
+        "title": "quickSurroundSuper"
+      },
+      {
+        "command": "mayiwen.quickSurroundSuper",
+        "title": "quickStringAttr"
+      },
+      {
+        "command": "mayiwen.quickMethod",
+        "title": "quickMethod"
+      }
     ],
     "keybindings": [
       {
@@ -100,7 +145,6 @@
         "command": "mayiwen.quickPublic",
         "key": "alt+y"
       },
-
       {
         "command": "mayiwen.quickString",
         "key": "alt+oem_comma"
@@ -117,7 +161,6 @@
         "command": "mayiwen.quickCurlyBrackets",
         "key": "alt+l"
       },
-
       {
         "command": "mayiwen.quickSurround",
         "key": "alt+b"

@@ -310,8 +310,8 @@ export const quickMethod = vscode.commands.registerTextEditorCommand(
 
     }
     if (getType() === "html") {
-      // editSnippetInner(`class=""`, textEditor.selection.active.character);
-      // commandsLoop("cursorLeft", 1);
+      editSnippetInner(`{{  }}`, textEditor.selection.active.character);
+      commandsLoop("cursorLeft", 3);
     }
   }
 );
